@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+iframe {
+  display: block;
+  margin: 3vh auto;
+  width: 80vw;
+  min-height: 20vh;
+}
