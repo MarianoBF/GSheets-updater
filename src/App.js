@@ -2,6 +2,7 @@ import { Button, Form, Container, Header } from 'semantic-ui-react'
 import {useState} from "react"
 import axios from "axios"
 import './App.css';
+import IframeGS from "./components/IframeGS"
 
 function App() {
 
@@ -58,6 +59,9 @@ const submiteador = (e) => {
     <Button color="blue" type='submit'>Submit</Button>
   </Form>
 </Container>
+
+<IframeGS />
+
 </main>
   );
 }
