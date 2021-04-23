@@ -5,66 +5,60 @@ import './App.css';
 
 function App() {
 
-const [nombre, setNombre] = useState("Juan");
-const [apellido, setApellido] = useState("Pérez");
-const [edad, setEdad] = useState("60");
-const [nacionalidad, setNacionalidad] = useState("Argentina");
-
-const cambioNombre = (e) => {
-  setNombre(e.target.value)
+const sampleValues = {
+  nombre: "Juan",
+  apellido: "Pérez",
+  edad: 50,
+  nacionalidad: "keniata"
 }
 
-const cambioApellido = (e) => {
-  setApellido(e.target.value)
+const [renglon, setRenglon] = useState(sampleValues);
+
+const handleInput = (e) => {
+  const {name, value} = e.target;
+  setRenglon({...renglon, [name]: value})
 }
 
- 
-const cambioEdad = (e) => {
-  setEdad(e.target.value)
-}
-
- 
-const cambioNacionalidad = (e) => {
-  setNacionalidad(e.target.value)
-}
- 
 const submiteador = (e) => {
   console.log(e)
   //e.preventDefault()
   const datos = {
-    Nombre: nombre,
-    Apellido: apellido,
-    Edad: edad,
-    Nacionalidad: nacionalidad
+    Nombre: renglon.nombre,
+    Apellido: renglon.apellido,
+    Edad: renglon.edad,
+    Nacionalidad: renglon.nacionalidad
   }
   axios.post("https://sheet.best/api/sheets/001713ed-b1af-40b8-99a5-ceca0f58a844", datos)
-    .then(response => {console.log(response)})
+    .then(response => {
+      console.log(response)
+      })
 }
 
-  return (
+  return (<main>
 <Container className="contenedor">
   <Header as='h2'>Completá la planilla para mandar los datos a Google Sheets</Header>
   <Form onSubmit={submiteador}>
     <Form.Field>
       <label>Nombre</label>
-      <input placeholder='Juan' name="nombre" value={nombre} onChange={cambioNombre}/>
+      <input placeholder='Juan' name="nombre" value={renglon.nombre} onChange={handleInput}/>
     </Form.Field>
     <Form.Field>
       <label>Apellido</label>
-      <input placeholder='Perez' name="apellido" value={apellido} onChange={cambioApellido}/>
+      <input placeholder='Perez' name="apellido" value={renglon.apellido} onChange={handleInput}/>
     </Form.Field>
     <Form.Field>
       <label>Edad</label>
-      <input type="number" placeholder='60' name= "edad" max="120" min="1" onChange={cambioEdad}/>
+      <input type="number" placeholder='60' name= "edad" max="120" min="1" value={renglon.edad} onChange={handleInput}/>
     </Form.Field>
     <Form.Field>
       <label>Nacionalidad</label>
-      <input placeholder='Argentina' name="nacionalidad" onChange={cambioNacionalidad} />
+      <input placeholder='Argentina' name="nacionalidad" value={renglon.nacionalidad} onChange={handleInput} />
     </Form.Field>
     
     <Button color="blue" type='submit'>Submit</Button>
   </Form>
 </Container>
+</main>
   );
 }
 
