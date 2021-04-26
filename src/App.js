@@ -41,6 +41,30 @@ function App() {
       });
   };
 
+  const [borrado, setBorrado] = useState();
+
+  const handleBorrado = e => {
+    setBorrado(e.target.value);
+  };
+
+  const borrar = e => {
+    console.log(e);
+    axios
+      .delete(
+        "https://sheet.best/api/sheets/001713ed-b1af-40b8-99a5-ceca0f58a844/" +
+          borrado
+      )
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setBorrado("");
+
+  };
+
   return (
     <main>
       <Container className="contenedor">
@@ -90,6 +114,24 @@ function App() {
 
           <Button color="blue" type="submit">
             Submit
+          </Button>
+        </Form>
+      </Container>
+
+      <Container className="contenedor">
+        <Header as="h2">Borrar una fila</Header>
+        <Form onSubmit={borrar}>
+          <Form.Field>
+            <label>Ingresa el número de la fila que querés borrar</label>
+            <input
+              placeholder="3"
+              name="borrado"
+              value={borrado}
+              onChange={handleBorrado}
+            />
+          </Form.Field>
+          <Button color="red" type="submit">
+            Borrar
           </Button>
         </Form>
       </Container>
