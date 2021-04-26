@@ -8,7 +8,7 @@ function App() {
   const sampleValues = {
     nombre: "Juan",
     apellido: "Pérez",
-    edad: 50,
+    edad: Math.floor(Math.random() * 100),
     nacionalidad: "keniata",
   };
 
@@ -33,12 +33,12 @@ function App() {
         datos
       )
       .then(response => {
-        console.log(response)
+        console.log(response);
         window.location.reload();
       })
       .catch(error => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   };
 
   return (
@@ -94,9 +94,8 @@ function App() {
         </Form>
       </Container>
 
-      <IframeGS/>
-
-   </main>
+      <IframeGS />
+    </main>
   );
 }
 
