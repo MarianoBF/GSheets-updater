@@ -19,6 +19,8 @@ function App() {
     setRenglon({...renglon, [name]: value});
   };
 
+  const {REACT_APP_SHEET_API} = process.env
+  
   const submiteador = e => {
     console.log(e);
     const datos = {
@@ -29,7 +31,7 @@ function App() {
     };
     axios
       .post(
-        "https://sheet.best/api/sheets/001713ed-b1af-40b8-99a5-ceca0f58a844",
+        REACT_APP_SHEET_API,
         datos
       )
       .then(response => {
@@ -51,7 +53,7 @@ function App() {
     console.log(e);
     axios
       .delete(
-        "https://sheet.best/api/sheets/001713ed-b1af-40b8-99a5-ceca0f58a844/" +
+        REACT_APP_SHEET_API + "/" +
           borrado
       )
       .then(response => {
