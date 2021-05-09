@@ -1,8 +1,9 @@
 import {Button, Form, Container, Header} from "semantic-ui-react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import "./App.css";
 import IframeGS from "./components/IframeGS";
+import Datos from "./components/Datos";
 
 function App() {
   const sampleValues = {
@@ -19,8 +20,8 @@ function App() {
     setRenglon({...renglon, [name]: value});
   };
 
-  const {REACT_APP_SHEET_API} = process.env
-  
+  const {REACT_APP_SHEET_API} = process.env;
+
   const submiteador = e => {
     console.log(e);
     const datos = {
@@ -30,10 +31,7 @@ function App() {
       Nacionalidad: renglon.nacionalidad,
     };
     axios
-      .post(
-        REACT_APP_SHEET_API,
-        datos
-      )
+      .post(REACT_APP_SHEET_API, datos)
       .then(response => {
         console.log(response);
         window.location.reload();
@@ -52,10 +50,7 @@ function App() {
   const borrar = e => {
     console.log(e);
     axios
-      .delete(
-        REACT_APP_SHEET_API + "/" +
-          borrado
-      )
+      .delete(REACT_APP_SHEET_API + "/" + borrado)
       .then(response => {
         console.log(response);
         window.location.reload();
@@ -63,9 +58,17 @@ function App() {
       .catch(error => {
         console.log(error);
       });
-      setBorrado("");
-
+    setBorrado("");
   };
+
+  const [datosHoja, SetDatosHoja] = useState([])
+
+  useEffect(()=>{
+    fetch(REACT_APP_SHEET_API)
+    .then(res=>res.json())
+    // .then(res=>SetDatosHoja(res))
+
+  },)
 
   return (
     <main>
@@ -139,6 +142,8 @@ function App() {
       </Container>
 
       <IframeGS />
+
+      <Datos datos={datosHoja}/>
     </main>
   );
 }
