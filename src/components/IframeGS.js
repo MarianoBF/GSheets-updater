@@ -1,4 +1,4 @@
-function IframeGS(props) {
+function IframeGS() {
   return (
     <div>
       <iframe

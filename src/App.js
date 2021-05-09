@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import "./App.css";
 import IframeGS from "./components/IframeGS";
-import Datos from "./components/Datos";
+import Sheet from "./components/Sheet";
 
 function App() {
   const sampleValues = {
@@ -143,7 +143,7 @@ function App() {
 
       <IframeGS />
 
-      <Datos datos={datosHoja}/>
+      <Sheet datos={datosHoja}/>
     </main>
   );
 }
